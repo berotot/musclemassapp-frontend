@@ -43,6 +43,7 @@ const handleSubmit = (e) => {
     .then((res) => {
       alert("berhasil menambahkan latihan");
       clickOn(!clickOut)
+
     })
     .catch((err) => {
       console.log(err.response.data);

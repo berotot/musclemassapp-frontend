@@ -44,7 +44,7 @@ export const KelolaLatihan = () => {
     if (showLatihan && data.length === 0) {
       getDataLatihan();
     }
-  }, [showLatihan]);
+  }, [showLatihan,clickForm]);
   return (
     <div className="p-4 h-screen">
       <Navbar />
