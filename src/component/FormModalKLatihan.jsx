@@ -42,6 +42,7 @@ const handleSubmit = (e) => {
     .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`, form)
     .then((res) => {
       alert("berhasil menambahkan latihan");
+      clickOut(!clickOn)
     })
     .catch((err) => {
       console.log(err.response.data);
@@ -212,7 +213,7 @@ const handleSubmit = (e) => {
           </div>
 
           <div className="font-['poppins'] text-[15px]">
-            <button className="cursor-pointer w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium">
+            <button type="submit" className="cursor-pointer w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium">
               Kirim
             </button>
           </div>
