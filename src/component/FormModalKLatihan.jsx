@@ -18,7 +18,7 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
 
   
 const handleSubmit = (e) => {
-  // e.preventDefault(); 
+  e.preventDefault(); 
  
   // const formData = new FormData();
   
