@@ -26,7 +26,6 @@ export const KelolaLatihan = () => {
     lengan: false,
   });
   const handleShowLatihan = (latihan) => {
-    // Set semua latihan menjadi false, kecuali yang diklik
     setShowLatihan((prevShowLatihan) => ({
       perut: latihan === 'perut' ? !prevShowLatihan.perut : false,
       dada: latihan === 'dada' ? !prevShowLatihan.dada : false,

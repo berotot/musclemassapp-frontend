@@ -18,8 +18,8 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
 
   
 const handleSubmit = (e) => {
-  e.preventDefault(); // Memperbaiki typo
-
+  // e.preventDefault(); 
+ 
   // const formData = new FormData();
   
   // // Pastikan untuk menambahkan file hanya jika ada
