@@ -13,18 +13,29 @@ export const KelolaLatihan = () => {
 
   const getDataLatihan = async () => {
     await axios
-      .get(`${process.env.REACT_API_URL}/api/v1/admin/latihan`)
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`)
       .then((res) => {
         setdata(res.data.data);
       })
       .catch((res) => {});
   };
 
-  const [showLatihan, setshowLatihan] = useState(false);
-
+  const [showLatihan, setShowLatihan] = useState({
+    perut: false,
+    dada: false,
+    lengan: false,
+  });
+  const handleShowLatihan = (latihan) => {
+    // Set semua latihan menjadi false, kecuali yang diklik
+    setShowLatihan((prevShowLatihan) => ({
+      perut: latihan === 'perut' ? !prevShowLatihan.perut : false,
+      dada: latihan === 'dada' ? !prevShowLatihan.dada : false,
+      lengan: latihan === 'lengan' ? !prevShowLatihan.lengan : false,
+    }));
+  };
   const deleteDataLatihan = async (id) => {
     await axios
-      .delete(`${process.env.REACT_API_URL}/api/v1/admin/delete/latihan/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan/${id}`)
       .then((res) => {
         getDataLatihan();
       })
@@ -34,7 +45,7 @@ export const KelolaLatihan = () => {
     if (showLatihan && data.length === 0) {
       getDataLatihan();
     }
-  }, [showLatihan, data]);
+  }, [showLatihan]);
   return (
     <div className="p-4 h-screen">
       <Navbar />
@@ -72,7 +83,7 @@ export const KelolaLatihan = () => {
 
         <ul className="my-4 ">
           <li
-            onClick={() => setshowLatihan(!showLatihan)}
+            onClick={() => handleShowLatihan('lengan')}
             className="h-[84px]  p-4 ring-1 group bg-center bg-cover ring-[#45474B] rounded-md relative"
           >
             <div
@@ -84,10 +95,32 @@ export const KelolaLatihan = () => {
             </p>
           </li>
 
-          {showLatihan && (
+          {showLatihan.lengan && (
             <ListLatihanKelola
               deleteDataLatihan={deleteDataLatihan}
               data={data}
+              typeLatihan={"lengan"}
+            />
+          )}
+
+<li
+            onClick={() => handleShowLatihan('perut')}
+            className="h-[84px]  p-4 my-4 ring-1 group bg-center bg-cover ring-[#45474B] rounded-md relative"
+          >
+            <div
+              style={{ backgroundImage: `url(${armMuscle})` }}
+              className="absolute inset-0 bg-center bg-cover brightness-75 z-0"
+            />
+            <p className="relative z-0 font-[poppins] group-hover:brightness-100  tracking-[1px] font-bold text-[19px]   text-[#F5F7F8]">
+              OTOT PERUT
+            </p>
+          </li>
+
+          {showLatihan.perut && (
+            <ListLatihanKelola
+              deleteDataLatihan={deleteDataLatihan}
+              data={data}
+              typeLatihan={"perut"}
             />
           )}
         </ul>

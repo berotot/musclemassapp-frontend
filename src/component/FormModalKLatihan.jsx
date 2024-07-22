@@ -16,31 +16,38 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
     contentPath: null,
   });
 
-  const handleSubmit = (e) => {
-    const formData = new FormData();
-    formData.append("contentPath", form.contentPath[0]);
-    formData.append("contentPath", form.contentPath);
-    formData.append("name", form.name);
-    formData.append("description", form.description);
-    formData.append("muscleGroup", form.muscleGroup);
-    formData.append("reps", form.reps);
-    formData.append("c1", form.c1);
-    formData.append("c2", form.c2);
-    formData.append("c3", form.c3);
-    formData.append("c4", form.c4);
-    formData.append("time_training", form.time_training);
-    formData.append("difficulty", form.difficulty);
+  
+const handleSubmit = (e) => {
+  e.preventDefault(); // Memperbaiki typo
 
-    axios
-      .post(`${process.env.APIURL}/v1/admin/post/latihan`, formData)
-      .then((res) => {
-        alert("berhasil menambahkan asset kendaraan");
-      })
-      .catch((res) => {
-        console.log(res.response.data);
-        alert(res.response.data.message);
-      });
-  };
+  // const formData = new FormData();
+  
+  // // Pastikan untuk menambahkan file hanya jika ada
+  // if (form.contentPath && form.contentPath.length > 0) {
+  //   formData.append("contentPath", form.contentPath[0]);
+  // }
+  
+  // formData.append("name", form.name);
+  // formData.append("description", form.description);
+  // formData.append("muscleGroup", form.muscleGroup);
+  // formData.append("reps", form.reps);
+  // formData.append("c1", form.c1);
+  // formData.append("c2", form.c2);
+  // formData.append("c3", form.c3);
+  // formData.append("c4", form.c4);
+  // formData.append("time_training", form.time_training);
+  // formData.append("difficulty", form.difficulty);
+
+  axios
+    .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`, form)
+    .then((res) => {
+      alert("berhasil menambahkan latihan");
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      alert(err.response.data.message);
+    });
+};
   return (
     <>
       <div
@@ -115,7 +122,7 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
                 setform({ ...form, time_training: e.target.value })
               }
               className="rounded-md h-8 px-2 ring-1 ring-black"
-              type="text"
+              type="number"
             />
           </div>
 
@@ -182,7 +189,7 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
             </label>
             <select
               onChange={(e) => setform({ ...form, c4: e.target.value })}
-              className="rounded-md h-8 px-2 ring-1 ring-black"
+              className="rounded-md h-8 px-2 ring-1 ring-black optional:text-[17px]"
             >
               <option value="">Pilih bobot</option>
               <option value="3">baik</option>
@@ -190,11 +197,12 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
               <option value="1">kurang</option>
             </select>
           </div>
-          <div className="text-[17px] flex w-full gap-2 flex-col font-['poppins']">
+          <div className="text-[17px]  w-full gap-2 flex-col font-['poppins'] hidden">
             <label className="font-medium" htmlFor="">
               Konten
             </label>
             <input
+              disabled
               onChange={(e) =>
                 setform({ ...form, contentPath: [e.target.files[0]] })
               }

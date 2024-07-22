@@ -1,12 +1,12 @@
 import React from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-export const ListLatihanKelola = ({data,deleteDataLatihan}) => {
+export const ListLatihanKelola = ({data,deleteDataLatihan,typeLatihan}) => {
   
   
   return (
     <>
     {data.map((res) =>
-      res.muscleGroup === "lengan" ? (
+      res.muscleGroup === typeLatihan ? (
         <li className=" shadow-md h-max items-center font-['poppins'] flex flex-row justify-between my-4 p-2 ring-1  bg-center bg-cover ring-[#45474B] rounded-md ">
           <div>
             <h1 className=" text-[18px] font-extrabold first-letter:uppercase">

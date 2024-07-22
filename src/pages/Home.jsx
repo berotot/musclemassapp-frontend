@@ -14,7 +14,7 @@ export const Home = () => {
             Let's Build Muscle Mass
           </h2>
           <button
-            onClick={() => navigate("/survei")}
+            onClick={() => navigate("/kelolalatihan")}
             className=" shadow-md cursor-pointer  w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium  font-[poppins]"
           >
             start
