@@ -6,7 +6,6 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
     description: null,
     muscleGroup: null,
     reps: null,
-    weight_criteria: null,
     c1: null,
     c2: null,
     c3: null,
