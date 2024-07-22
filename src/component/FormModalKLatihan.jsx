@@ -13,43 +13,40 @@ export const FormModalKLatihan = ({ clickOn, clickOut }) => {
     c4: null,
     time_training: null,
     difficulty: null,
-    contentPath: null,
+    // contentPath: null,
   });
 
-  
-const handleSubmit = (e) => {
-  e.preventDefault(); 
- 
-  // const formData = new FormData();
-  
-  // // Pastikan untuk menambahkan file hanya jika ada
-  // if (form.contentPath && form.contentPath.length > 0) {
-  //   formData.append("contentPath", form.contentPath[0]);
-  // }
-  
-  // formData.append("name", form.name);
-  // formData.append("description", form.description);
-  // formData.append("muscleGroup", form.muscleGroup);
-  // formData.append("reps", form.reps);
-  // formData.append("c1", form.c1);
-  // formData.append("c2", form.c2);
-  // formData.append("c3", form.c3);
-  // formData.append("c4", form.c4);
-  // formData.append("time_training", form.time_training);
-  // formData.append("difficulty", form.difficulty);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  axios
-    .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`, form)
-    .then((res) => {
-      alert("berhasil menambahkan latihan");
-      clickOn(!clickOut)
+    // const formData = new FormData();
 
-    })
-    .catch((err) => {
-      console.log(err.response.data);
-      alert(err.response.data.message);
-    });
-};
+    // // Pastikan untuk menambahkan file hanya jika ada
+    // if (form.contentPath && form.contentPath.length > 0) {
+    //   formData.append("contentPath", form.contentPath[0]);
+    // }
+
+    // formData.append("name", form.name);
+    // formData.append("description", form.description);
+    // formData.append("muscleGroup", form.muscleGroup);
+    // formData.append("reps", form.reps);
+    // formData.append("c1", form.c1);
+    // formData.append("c2", form.c2);
+    // formData.append("c3", form.c3);
+    // formData.append("c4", form.c4);
+    // formData.append("time_training", form.time_training);
+    // formData.append("difficulty", form.difficulty);
+
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`, form)
+      .then((res) => {
+        alert("berhasil menambahkan latihan");
+        clickOn(!clickOut);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
   return (
     <>
       <div
@@ -214,7 +211,10 @@ const handleSubmit = (e) => {
           </div>
 
           <div className="font-['poppins'] text-[15px]">
-            <button type="submit" className="cursor-pointer w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium">
+            <button
+              type="submit"
+              className="cursor-pointer w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium"
+            >
               Kirim
             </button>
           </div>
