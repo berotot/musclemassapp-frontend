@@ -42,7 +42,7 @@ const handleSubmit = (e) => {
     .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`, form)
     .then((res) => {
       alert("berhasil menambahkan latihan");
-      clickOut(!clickOn)
+      clickOn(!clickOut)
     })
     .catch((err) => {
       console.log(err.response.data);
