@@ -1,20 +1,53 @@
 import React, { useState } from "react";
 import { useSurvei } from "../store/AppContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { DataImage } from "../etc/img/DataImage";
 import { Navbar } from "../component/Navbar";
 
 export const Survei = () => {
   const { setWeight, weight } = useSurvei();
   const navigate = useNavigate();
-
+  const { type, diff } = useParams();
   const { ectomorph, mesomorph, endomorph } = DataImage();
-
   const [indexSurvei, SetIndexSurvei] = useState(1);
+  const [Bmi, setBmi] = useState({ b: 0, t: 0 });
+
   const prevSurvei = () =>
     indexSurvei === 0 ? SetIndexSurvei(1) : SetIndexSurvei(indexSurvei - 1);
   const nextSurvei = () =>
-    indexSurvei >= 4 ? SetIndexSurvei(1) : SetIndexSurvei(indexSurvei + 1);
+    indexSurvei >= 3 ? SetIndexSurvei(1) : SetIndexSurvei(indexSurvei + 1);
+
+  const handleWeightChange = (e) => {
+    const newWeight = parseInt(e.target.value);
+    const newHeight = Bmi.t;
+    const newBmi = newHeight ? newWeight / (newHeight * newHeight) : 0;
+
+    setBmi({
+      ...Bmi,
+      b: newWeight,
+    });
+
+    setWeight({
+      ...weight,
+      bmi: newBmi,
+    });
+  };
+
+  const handleHeightChange = (e) => {
+    const newHeight = parseInt(e.target.value) / 100; // konversi cm ke meter
+    const newWeight = Bmi.b;
+    const newBmi = newHeight ? newWeight / (newHeight * newHeight) : 0;
+
+    setBmi({
+      ...Bmi,
+      t: newHeight,
+    });
+
+    setWeight({
+      ...weight,
+      bmi: newBmi,
+    });
+  };
 
   return (
     <div className="p-4 h-screen">
@@ -37,6 +70,7 @@ export const Survei = () => {
         </div>
 
         <div className="h-full w-full">
+          {/*           
           <ul
             className={`${
               indexSurvei !== 1 ? "hidden" : ""
@@ -87,83 +121,28 @@ export const Survei = () => {
                 />
               </div>
             </div>
-          </ul>
+          </ul> */}
 
           <ul
             className={`${
-              indexSurvei !== 2 ? "hidden" : ""
-            } list-inside  list-disc`}
+              indexSurvei !== 1 ? "hidden" : ""
+            } list-inside  list-disc my-4`}
           >
             <li className="font-[poppins] my-4">
-              Tentukan fit tubuh mu hari ini
+              Tentukan berat badan dan tinggi badan mu
             </li>
-
-            <div className={`my-4 w-full flex gap-2`}>
+            <div className={` w-full my-4 flex flex-col gap-4`}>
+              <label htmlFor="">Berat Badan</label>
               <input
-                checked={weight.tingkat_fit_tubuh === 30}
-                onChange={(e) =>
-                  setWeight({
-                    ...weight,
-                    tingkat_fit_tubuh: 30,
-                  })
-                }
-                className=" font-[poppins]    "
-                type="radio"
+                defaultValue={Bmi.b}
+                onChange={handleWeightChange}
+                className=" font-[poppins] w-full rounded-md px-4  pt-2 pb-2 ring-1 ring-black"
+                type="number"
               />
-              <label className=" font-[poppins]" htmlFor="">
-                Kurang fit
-              </label>
-            </div>
-
-            <div className={`my-4 w-full flex gap-2`}>
+              <label htmlFor="">Tinggi Badan</label>
               <input
-                checked={weight.tingkat_fit_tubuh === 60}
-                onChange={(e) =>
-                  setWeight({
-                    ...weight,
-                    tingkat_fit_tubuh: 60,
-                  })
-                }
-                className=" font-[poppins]    "
-                type="radio"
-              />
-              <label className=" font-[poppins]" htmlFor="">
-                Biasa saja
-              </label>
-            </div>
-            <div className={`my-4 w-full flex gap-2`}>
-              <input
-                checked={weight.tingkat_fit_tubuh === 90}
-                onChange={(e) =>
-                  setWeight({
-                    ...weight,
-                    tingkat_fit_tubuh: 90,
-                  })
-                }
-                className=" font-[poppins]    "
-                type="radio"
-              />
-              <label className=" font-[poppins]" htmlFor="">
-                Sangat fit
-              </label>
-            </div>
-          </ul>
-
-          <ul
-            className={`${
-              indexSurvei !== 3 ? "hidden" : ""
-            } list-inside  list-disc`}
-          >
-            <li className="font-[poppins] my-4">Tentukan berat badanmu</li>
-            <div className={` w-full my-4`}>
-              <input
-                defaultValue={weight.berat_badan}
-                onChange={(e) =>
-                  setWeight({
-                    ...weight,
-                    berat_badan: parseInt(e.target.value),
-                  })
-                }
+                defaultValue={Bmi.t}
+                onChange={handleHeightChange}
                 className=" font-[poppins] w-full rounded-md px-4  pt-2 pb-2 ring-1 ring-black"
                 type="number"
               />
@@ -172,59 +151,118 @@ export const Survei = () => {
 
           <ul
             className={`${
-              indexSurvei !== 4 ? "hidden" : ""
-            } list-inside list-disc`}
+              indexSurvei !== 2 ? "hidden" : ""
+            } list-inside list-disc my-4`}
           >
             <li className="font-[poppins] my-4">
-              Tentukan tingkat kelelahan latihan.
+              Tentukan seberapa lelah Anda ingin merasa setelah latihan
             </li>
             <div className={`my-4 w-full flex gap-2`}>
               <input
-                checked={weight.tingkat_kelelahan === 30}
+                checked={weight.intensitas === 1}
                 onChange={(e) =>
                   setWeight({
                     ...weight,
-                    tingkat_kelelahan: 30,
+                    intensitas: 1,
                   })
                 }
                 className=" font-[poppins]    "
                 type="radio"
               />
-              
+
               <label className=" font-[poppins]" htmlFor="">
-                Biasa saja
+                Sedikit lelah
               </label>
             </div>
             <div className={`my-4 w-full flex gap-2`}>
               <input
-                checked={weight.tingkat_kelelahan === 60}
+                checked={weight.intensitas === 2}
                 onChange={(e) =>
                   setWeight({
                     ...weight,
-                    tingkat_kelelahan: 60,
+                    intensitas: 2,
                   })
                 }
                 className=" font-[poppins]    "
                 type="radio"
               />
               <label className=" font-[poppins]" htmlFor="">
-                Sulit
+                lelah
               </label>
             </div>
             <div className={`my-4 w-full flex gap-2`}>
               <input
-                checked={weight.tingkat_kelelahan === 90}
+                checked={weight.intensitas === 3}
                 onChange={(e) =>
                   setWeight({
                     ...weight,
-                    tingkat_kelelahan: 90,
+                    intensitas: 3,
                   })
                 }
                 className=" font-[poppins]    "
                 type="radio"
               />
               <label className=" font-[poppins]" htmlFor="">
-                Sangat Sulit
+                Sangat Lelah
+              </label>
+            </div>
+          </ul>
+
+          <ul
+            className={`${
+              indexSurvei !== 3 ? "hidden" : ""
+            } list-inside list-disc my-4`}
+          >
+            <li className="font-[poppins] my-4">
+              Seberapa sering Anda melakukan latihan dalam seminggu
+            </li>
+            <div className={`my-4 w-full flex gap-2`}>
+              <input
+                checked={weight.endurance === 1}
+                onChange={(e) =>
+                  setWeight({
+                    ...weight,
+                    endurance: 1,
+                  })
+                }
+                className=" font-[poppins]    "
+                type="radio"
+              />
+
+              <label className=" font-[poppins]" htmlFor="">
+                1-2 kali per minggu
+              </label>
+            </div>
+            <div className={`my-4 w-full flex gap-2`}>
+              <input
+                checked={weight.endurance === 2}
+                onChange={(e) =>
+                  setWeight({
+                    ...weight,
+                    endurance: 2,
+                  })
+                }
+                className=" font-[poppins]    "
+                type="radio"
+              />
+              <label className=" font-[poppins]" htmlFor="">
+                3-4 kali per minggu
+              </label>
+            </div>
+            <div className={`my-4 w-full flex gap-2`}>
+              <input
+                checked={weight.endurance === 3}
+                onChange={(e) =>
+                  setWeight({
+                    ...weight,
+                    endurance: 3,
+                  })
+                }
+                className=" font-[poppins]    "
+                type="radio"
+              />
+              <label className=" font-[poppins]" htmlFor="">
+                5-7 kali per minggu
               </label>
             </div>
           </ul>
@@ -232,17 +270,12 @@ export const Survei = () => {
 
         <div
           className={`${
-            weight.berat_badan &&
-            weight.tingkat_tubuh &&
-            weight.tingkat_fit_tubuh &&
-            weight.tingkat_kelelahan
-              ? ""
-              : "hidden"
+            weight.bmi && weight.intensitas && weight.endurance ? "" : "hidden"
           } flex justify-center`}
         >
           <button
             onClick={() => {
-              navigate("/programlatihan");
+              navigate(`/programlatihan/${diff}/${type}`);
             }}
             className=" text-[15px] cursor-pointer  w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium  font-[poppins]"
           >

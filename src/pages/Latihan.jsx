@@ -6,10 +6,13 @@ import { RestLatihan } from "../component/RestLatihan";
 import { scores } from "../etc/DataLatihanAlternativ";
 import { useSurvei } from "../store/AppContext";
 import { IoMdExit } from "react-icons/io";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export const Latihan = () => {
   const { prev, next } = DataImage();
-  const { dataWorkout } = useSurvei();
+  const { weight,dataWorkout } = useSurvei();
+  const { type } = useParams();
   const [restLatihan, setRestLatihan] = useState(false);
   const [indexLatihan, SetindexLatihan] = useState(0);
 
@@ -25,18 +28,39 @@ export const Latihan = () => {
       SetindexLatihan(indexLatihan - 1);
     }
   };
+
+
+  const postDataLatihan = async () => {
+    await axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/v1/user/latihan/activity`,
+        {
+          muscleGroup: type,
+          point_activity: dataWorkout.length + 10,
+          totals_excercise: dataWorkout.length,
+          weight_body_current: weight,
+        }
+      )
+      .then((res) => {
+    
+      })
+      .catch((res) => {});
+  };
   return (
     <div className="p-4 h-screen">
       <Navbar />
 
       <main className="">
         {dataWorkout.map((res, index) => (
-          <div
-            key={res._id}
-            className={`${
-              index !== indexLatihan ? "hidden" : ""
-            } relative w-full flex flex-col justify-between bg-cover bg-[url('https://www.bodybuilding.com/exercises/exerciseImages/sequences/742/Male/m/742_2.jpg')] p-4 font-['poppins'] h-[316px] rounded-md overflow-hidden`}
-          >
+           <div
+           key={res._id}
+           className={`${
+             index !== indexLatihan ? "hidden" : ""
+           } relative w-full flex flex-col justify-between bg-cover p-4 font-['poppins'] h-[316px] rounded-md overflow-hidden`}
+           style={{
+             backgroundImage: res.contentUrl !== "null" ? `url(${res.contentUrl})` : 'none',
+           }}
+         >
             <div className="absolute inset-0 bg-black  opacity-35 rounded-md"></div>
             {/* <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-black to-transparent opacity-50"></div>   */}
             <div className="relative z-10 flex justify-between">
@@ -47,7 +71,7 @@ export const Latihan = () => {
             </div>
             <div className="relative z-10 flex justify-between">
               <h1 className="text-white">{res.reps} reps</h1>
-              <h1 className="text-white">{res.time_training} Detik</h1>
+              <h1 className="text-white">{res.time_training ? res.time_training: 0} Detik</h1>
             </div>
           </div>
         ))}
@@ -88,7 +112,8 @@ export const Latihan = () => {
             </button>
             <button
               onClick={() => {
-                NextLatihan();
+                // NextLatihan();
+                postDataLatihan()
               }}
               className={`${
                 indexLatihan === dataWorkout.length - 1 ? "" : "hidden"

@@ -1,10 +1,18 @@
 import React from "react";
 import { Navbar } from "../component/Navbar";
 import { DataImage } from "../etc/img/DataImage";
+import { useNavigate } from "react-router-dom";
+import { VerifyUser } from "../routes/route";
+import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
 
 export const Dashboard = () => {
   const { armMuscle } = DataImage();
+  const { isSuccess, userses,isLoading, isError} = VerifyUser()
+  const navigate = useNavigate();
   return (
+    <>
+    {isError && <FormModalAuthSign />}
+    
     <div className="p-4 h-screen">
       <Navbar />
 
@@ -30,17 +38,20 @@ export const Dashboard = () => {
         </div>
 
         <ul className="my-4">
-          <li className="h-[84px] shadow-md p-4 ring-1 group bg-center bg-cover ring-[#45474B] rounded-md relative">
+          <li
+            onClick={() => navigate("/survei/pemula/chest")}
+            className="h-[84px] shadow-md p-4 ring-1 group bg-center bg-cover ring-[#45474B] rounded-md relative"
+          >
             <div
               style={{ backgroundImage: `url(${armMuscle})` }}
               className="absolute inset-0 bg-center bg-cover brightness-75 z-0"
             />
-            <p className="relative z-10 font-[poppins] group-hover:brightness-100  tracking-[1px] font-bold text-[19px]   text-[#F5F7F8]">
-              OTOT LENGAN
+            <p className="relative uppercase z-10 font-[poppins] group-hover:brightness-100  tracking-[1px] font-bold text-[19px]   text-[#F5F7F8]">
+              OTOT PERUT
             </p>
           </li>
         </ul>
       </main>
     </div>
-  );
+    </>);
 };

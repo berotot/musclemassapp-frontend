@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../component/Navbar";
 import { DataImage } from "../etc/img/DataImage";
+import axios from "axios";
+import { ListLeaderScore } from "../component/ListLeaderScore";
 
 export const LeaderboardScore = () => {
   const { armMuscle } = DataImage();
+  const [data, setdata] = useState([]);
+  const getDataLatihan = async () => {
+    await axios
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/user/leaderboard`)
+      .then((res) => {
+        setdata(res.data.data);
+      })
+      .catch((res) => {});
+  };
+  useEffect(()=>{
+    getDataLatihan()
+  },[])
   return (
     <div className="p-4 h-screen">
-      
       <Navbar />
 
       <main className="">
@@ -27,6 +40,7 @@ export const LeaderboardScore = () => {
           </div>
           <p className=" font-[poppins] text-[20px] font-bold">#12</p>
         </div>
+
         <div className=" my-4 h-[165px] w-full rounded-md bg-black"></div>
 
         <div className="w-full text-[#45474B] mt-8 font-[poppins]  flex-none font-semibold border-l-[5px] pl-2  border-[#45474B]">
@@ -34,15 +48,8 @@ export const LeaderboardScore = () => {
         </div>
 
         <ul className="my-4">
-          <li className="h-[84px] p-4 ring-1 group bg-center bg-cover ring-[#45474B] rounded-md relative">
-            <div
-              style={{ backgroundImage: `url(${armMuscle})` }}
-              className="absolute inset-0 bg-center bg-cover brightness-75 z-0"
-            />
-            <p className="relative z-10 font-[poppins] group-hover:brightness-100  tracking-[1px] font-bold text-[19px]   text-[#F5F7F8]">
-              OTOT LENGAN
-            </p>
-          </li>
+
+        <ListLeaderScore dataScore={data} />
         </ul>
       </main>
     </div>

@@ -4,19 +4,19 @@ const SurveiContext = createContext();
 
 export const AppContext = ({children}) => {
     const [survei, setSurvei] = useState([
-        "bentuk_badan",
-        "tingkat_fit_tubuh",
-        "berat_badan",
-        "tingkat_kelelahan",
+        "bmi",
+        "intesitas",
+        "endurance",
       ]);
     const [weight, setWeight] = useState({
-      "bentuk_badan":null,
-      "tingkat_fit_tubuh":null,
-      "berat_badan":null,
-      "tingkat_kelelahan":null,});
+      "bmi":null,
+      "intensitas":null,
+      "endurance":null,});
+  const [verify,setverify] = useState({ isSuccess: false, userses: false, isLoading: false, isError: false });
+      
       const [dataWorkout,setDataWorkout] = useState([])
   return (
-    <SurveiContext.Provider value={{survei,setSurvei,weight,setWeight,dataWorkout,setDataWorkout}}>
+    <SurveiContext.Provider value={{verify,setverify,survei,setSurvei,weight,setWeight,dataWorkout,setDataWorkout}}>
         {children}
     </SurveiContext.Provider>
   )
