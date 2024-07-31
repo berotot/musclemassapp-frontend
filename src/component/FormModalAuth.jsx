@@ -1,5 +1,7 @@
-import React from "react";
-
+import axios from "axios";
+import React, { useState } from "react";
+import Cookie from "js-cookie";
+import { VerifyUser } from "../routes/route";
 export const FormModalAuthLogin = () => {
   return (
     <>
@@ -87,11 +89,32 @@ export const FormModalAuthSignup = () => {
 };
 
 export const FormModalAuthSign = () => {
+  const [data, setData] = useState({ username: null });
+
+  const postFormSignupv2 = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/v2/auth/signupv2`, data)
+      .then((res) => {
+        alert(res.data.message);
+        Cookie.set("accessUser", JSON.stringify(res.data.data[0]), {
+          expires: 6000000,
+        });
+        VerifyUser()
+       
+      }).catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[99]" />
       <div className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
-        <div className="rounded-md bg-[#F5F7F8]  ring-1 ring-black py-6 px-4  mx-2 flex gap-4  items-center flex-col">
+        <form
+          onSubmit={postFormSignupv2}
+          className="rounded-md bg-[#F5F7F8]  ring-1 ring-black py-6 px-4  mx-2 flex gap-4  items-center flex-col"
+        >
           <div className="font-['poppins'] mb-4  text-[23px] font-bold">
             <h1>Signup</h1>
           </div>
@@ -100,6 +123,7 @@ export const FormModalAuthSign = () => {
               Username
             </label>
             <input
+              onChange={(e) => setData({ ...data, username: e.target.value })}
               className=" ring-1 ring-black focus:shadow-md rounded-md h-8 px-2"
               type="text"
             />
@@ -129,7 +153,7 @@ export const FormModalAuthSign = () => {
               Belum punya akun ? <span className="  font-semibold">signup</span>
             </p>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

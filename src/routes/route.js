@@ -1,4 +1,8 @@
-import { createBrowserRouter, useLocation, useNavigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { Home } from "../pages/Home";
 import { Dashboard } from "../pages/Dashboard";
 import { KelolaLatihan } from "../pages/KelolaLatihan";
@@ -10,22 +14,73 @@ import { Survei } from "../pages/Survei";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSurvei } from "../store/AppContext";
+import Cookie from "js-cookie";
+import { AktivitasLatihan } from "../pages/AktivitasLatihan";
+import { PageNot } from "../pages/PageNot";
 
 export const VerifyUser = () => {
-const {verify,setverify} = useSurvei()
+  const { verify, setverify } = useSurvei();
+  const decode = JSON.parse(decodeURIComponent(Cookie.get("accessUser")));
+
   useEffect(() => {
-    setverify({ isSuccess: false, userses: false, isLoading: true, isError: false });
-    axios.get('http://localhost:8080/api/v1/user/profile')  // Ubah URL endpoint sesuai kebutuhan Anda
-      .then((res) => {
-        setverify({ isSuccess: true, userses: res.data.data, isLoading: false, isError: false });
-      })
-      .catch((err) => {
-        setverify({ isSuccess: false, userses: false, isLoading: false, isError: true });
-      });
+    setverify({
+      isSuccess: false,
+      userses: [],
+      isLoading: true,
+      isError: false,
+    });
+
+    if (!verify.isSuccess) {
+      axios
+        .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/login`, {
+          email: decode.email,
+          password: decode.password,
+        })
+        .then((resi) => {
+          Cookie.set("accessToken", resi.data.data.token, {
+            expires: 6000000,
+          });
+          setverify((prev) => ({
+            ...prev,
+            isSuccess: true,
+            isLoading: false,
+            isError: false,
+          }));
+
+          // Fetch profile setelah login berhasil
+          axios
+            .get(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
+              headers: { Authorization: `Bearer ${resi.data.data.token}` },
+            })
+            .then((res) => {
+              setverify((prev) => ({
+                ...prev,
+                userses: res.data.data[0],
+              }));
+            })
+            .catch((err) => {
+              setverify({
+                isSuccess: false,
+                userses: [],
+                isLoading: false,
+                isError: true,
+              });
+            });
+        })
+        .catch((err) => {
+          setverify({
+            isSuccess: false,
+            userses: [],
+            isLoading: false,
+            isError: true,
+          });
+        });
+    }
   }, []);
 
   return verify;
 };
+
 
 // const PrivateRoute = ({ element, RoleAllowed, fallbackPath }) => {
 //   const location = useLocation();
@@ -51,9 +106,8 @@ const {verify,setverify} = useSurvei()
 //     return element;
 //   }
 
-//   return null;  
+//   return null;
 // };
-
 
 const router = createBrowserRouter([
   {
@@ -80,6 +134,11 @@ const router = createBrowserRouter([
     element: <KelolaLatihan />,
     path: "/kelolalatihan",
   },
+  
+  {
+    element: <AktivitasLatihan />,
+    path: "/aktivitas",
+  },
   {
     element: <Profile />,
     path: "/profile",
@@ -87,6 +146,10 @@ const router = createBrowserRouter([
   {
     element: <Survei />,
     path: "/survei/:diff/:type",
+  },
+  {
+    element: <PageNot />,
+    path: "/*",
   },
 ]);
 

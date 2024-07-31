@@ -4,7 +4,9 @@ import endo from "./Endomorph.png";
 import meso from "./Mesomorph.png";
 import prev from "./prev.png";
 import next from "./next.png";
-import armMuscle from "./armmuscle.jpg";
+import armMuscle from "./bahumuscle.jpg";
+import abdoMuscle from "./punggungmuscle.jpg"
+import chestMuscle from "./chestMuscle.jpg"
 export const DataImage = () => {
   return {
     ectomorph: ecto,
@@ -12,6 +14,8 @@ export const DataImage = () => {
     mesomorph: meso,
     prev: prev,
     next: next,
-    armMuscle:armMuscle
+    bahuMuscle:armMuscle,
+    punggungMuscle: abdoMuscle,
+    chestMuscle:chestMuscle,
   };
 };

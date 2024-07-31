@@ -8,12 +8,14 @@ import { useSurvei } from "../store/AppContext";
 import { IoMdExit } from "react-icons/io";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import Cookies from "js-cookie";
+import { SelesaiLatihan } from "../component/SelesaiLatihan";
 export const Latihan = () => {
   const { prev, next } = DataImage();
-  const { weight,dataWorkout } = useSurvei();
+  const { weight, dataWorkout } = useSurvei();
   const { type } = useParams();
   const [restLatihan, setRestLatihan] = useState(false);
+  const [selesaiLatihan, setselesaiLatihan] = useState(false);
   const [indexLatihan, SetindexLatihan] = useState(0);
 
   const NextLatihan = () => {
@@ -29,7 +31,6 @@ export const Latihan = () => {
     }
   };
 
-
   const postDataLatihan = async () => {
     await axios
       .post(
@@ -39,11 +40,13 @@ export const Latihan = () => {
           point_activity: dataWorkout.length + 10,
           totals_excercise: dataWorkout.length,
           weight_body_current: weight,
+        },
+        {
+          headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
         }
       )
-      .then((res) => {
-    
-      })
+
+      .then((res) => {})
       .catch((res) => {});
   };
   return (
@@ -52,15 +55,16 @@ export const Latihan = () => {
 
       <main className="">
         {dataWorkout.map((res, index) => (
-           <div
-           key={res._id}
-           className={`${
-             index !== indexLatihan ? "hidden" : ""
-           } relative w-full flex flex-col justify-between bg-cover p-4 font-['poppins'] h-[316px] rounded-md overflow-hidden`}
-           style={{
-             backgroundImage: res.contentUrl !== "null" ? `url(${res.contentUrl})` : 'none',
-           }}
-         >
+          <div
+            key={res._id}
+            className={`${
+              index !== indexLatihan ? "hidden" : ""
+            } relative w-full flex flex-col justify-between bg-cover p-4 font-['poppins'] h-[316px] rounded-md overflow-hidden`}
+            style={{
+              backgroundImage:
+                res.contentUrl !== "null" ? `url(${res.contentUrl})` : "none",
+            }}
+          >
             <div className="absolute inset-0 bg-black  opacity-35 rounded-md"></div>
             {/* <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-black to-transparent opacity-50"></div>   */}
             <div className="relative z-10 flex justify-between">
@@ -71,7 +75,9 @@ export const Latihan = () => {
             </div>
             <div className="relative z-10 flex justify-between">
               <h1 className="text-white">{res.reps} reps</h1>
-              <h1 className="text-white">{res.time_training ? res.time_training: 0} Detik</h1>
+              <h1 className="text-white">
+                {res.time_training ? res.time_training : 0} Detik
+              </h1>
             </div>
           </div>
         ))}
@@ -113,7 +119,8 @@ export const Latihan = () => {
             <button
               onClick={() => {
                 // NextLatihan();
-                postDataLatihan()
+                setselesaiLatihan(true)
+                postDataLatihan();
               }}
               className={`${
                 indexLatihan === dataWorkout.length - 1 ? "" : "hidden"
@@ -126,6 +133,9 @@ export const Latihan = () => {
         </div>
       </main>
 
+      {selesaiLatihan && (
+        <SelesaiLatihan initialSeconds={3} closeOn={setselesaiLatihan} />
+      )}
       {restLatihan && (
         <RestLatihan initialSeconds={20} closeOn={setRestLatihan} />
       )}
