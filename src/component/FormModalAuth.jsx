@@ -106,8 +106,8 @@ const navigate = useNavigate()
         // if(cekCook){
           // VerifyUser()
         // }
-       navigate(locationNow)
-       
+        alert(locationNow)
+       navigate(locationNow.pathname)
       }).catch((err) => {
         alert(err.response.data.message);
       });
