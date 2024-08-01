@@ -20,8 +20,7 @@ import { PageNot } from "../pages/PageNot";
 
 export const VerifyUser = () => {
   const { verify, setverify } = useSurvei();
-  const decode = JSON.parse(decodeURIComponent(Cookie.get("accessUser")));
-
+  
   useEffect(() => {
     setverify({
       isSuccess: false,
@@ -29,8 +28,9 @@ export const VerifyUser = () => {
       isLoading: true,
       isError: false,
     });
-
-    if (!verify.isSuccess) {
+    
+    if (!verify.isSuccess && Cookie.get("accessUser")) {
+      const decode = JSON.parse(decodeURIComponent(Cookie.get("accessUser")));
       axios
         .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/login`, {
           email: decode.email,
