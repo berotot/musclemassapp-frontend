@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSurvei } from "../store/AppContext";
+import { VerifyUser } from "../routes/route";
 
 export const ListLeaderScore = ({ dataScore, setmyscore }) => {
-  const { userses } = useSurvei();
+  const { userses } = VerifyUser();
 
   useEffect(() => {
     dataScore.forEach((res, index) => {
@@ -10,21 +11,21 @@ export const ListLeaderScore = ({ dataScore, setmyscore }) => {
         setmyscore({ username: res.username, point: res.total_points, posisi: index + 1 });
       }
     });
-  }, [dataScore]);
+  }, [dataScore, userses, setmyscore]);
 
   return (
     <ul>
       {dataScore.map((res, index) => (
         <li
           key={index}
-          className="shadow-md rounded-md p-2 px-4 ring-1 ring-[#45474B] my-8 w-full h-max items-center flex text-[#45474B] justify-between"
+          className="shadow-md rounded-md p-2 px-4 ring-1 ring-[#45474B] my-4 w-full h-max items-center flex text-[#45474B] justify-between"
         >
           <div className="flex items-center gap-2">
             <div className="ring-1 ring-black rounded-full w-[50px] h-[50px] overflow-hidden">
-              <img src={res.profilPath} alt={res.username} />
+              {/* <img src={res.profilPath} alt={res.username} /> */}
             </div>
             <div>
-              <p className="font-[poppins] font-semibold text-[20px]">
+              <p className="font-[poppins] font-semibold text-[20px] first-letter:uppercase">
                 {res.username}
               </p>
               <p className="font-[poppins] font-medium text-[15px]">

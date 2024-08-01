@@ -89,18 +89,21 @@ export const FormModalAuthSignup = () => {
 };
 
 export const FormModalAuthSign = () => {
-  const [data, setData] = useState({ username: null });
+  const [datas, setData] = useState({ username: null });
 
   const postFormSignupv2 = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/v2/auth/signupv2`, data)
+      .post(`${process.env.REACT_APP_API_URL}/api/v2/auth/signupv2`, datas)
       .then((res) => {
         alert(res.data.message);
         Cookie.set("accessUser", JSON.stringify(res.data.data[0]), {
           expires: 6000000,
         });
-        VerifyUser()
+        const cekCook = Cookie.get('accessUser')
+        if(cekCook){
+          VerifyUser()
+        }
        
       }).catch((err) => {
         alert(err.response.data.message);
@@ -123,7 +126,7 @@ export const FormModalAuthSign = () => {
               Username
             </label>
             <input
-              onChange={(e) => setData({ ...data, username: e.target.value })}
+              onChange={(e) => setData({ ...datas, username: e.target.value })}
               className=" ring-1 ring-black focus:shadow-md rounded-md h-8 px-2"
               type="text"
             />

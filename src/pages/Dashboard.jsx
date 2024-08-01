@@ -19,6 +19,7 @@ export const Dashboard = () => {
 
       <div className="p-4 h-screen">
         <Navbar />
+        <a className=" font-['poppins'] underline  font-semibold" href="https://forms.gle/kG31tQcpTcF7CLGW8">bantu developer isi questioner yuk 🙇‍♂️</a>
 
         <main>
           <div className="  my-8 w-full h-max items-center flex text-[#45474B] justify-between">

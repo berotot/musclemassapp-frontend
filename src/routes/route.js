@@ -20,8 +20,8 @@ import { PageNot } from "../pages/PageNot";
 
 export const VerifyUser = () => {
   const { verify, setverify } = useSurvei();
-  const {token,settoken} = useState(null)
-  
+  const [token, settoken] = useState(null);
+
   useEffect(() => {
     setverify({
       isSuccess: false,
@@ -29,9 +29,10 @@ export const VerifyUser = () => {
       isLoading: true,
       isError: false,
     });
-    
-    if (!verify.isSuccess && Cookie.get("accessUser")) {
-      const decode = JSON.parse(decodeURIComponent(Cookie.get("accessUser")));
+
+    const accessUser = Cookie.get("accessUser");
+    if (accessUser) {
+      const decode = JSON.parse(decodeURIComponent(accessUser));
       axios
         .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/login`, {
           email: decode.email,
@@ -41,16 +42,44 @@ export const VerifyUser = () => {
           Cookie.set("accessToken", resi.data.data.token, {
             expires: 6000000,
           });
-          settoken(resi.data.data.token)
+
+          settoken(resi.data.data.token);
           setverify((prev) => ({
             ...prev,
             isSuccess: true,
             isLoading: false,
             isError: false,
           }));
+        })
+        .catch((err) => {
+          setverify({
+            isSuccess: false,
+            userses: [],
+            isLoading: false,
+            isError: true,
+          });
+        });
+    } else {
+      setverify({
+        isSuccess: false,
+        userses: [],
+        isLoading: false,
+        isError: true,
+      });
+    }
+  }, [setverify]);
 
-          // Fetch profile setelah login berhasil
-          
+  useEffect(() => {
+    if (token) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setverify((prev) => ({
+            ...prev,
+            userses: res.data.data[0],
+          }));
         })
         .catch((err) => {
           setverify({
@@ -61,27 +90,7 @@ export const VerifyUser = () => {
           });
         });
     }
-  }, []);
-  useEffect(()=>{
-    axios
-            .get(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
-            .then((res) => {
-              setverify((prev) => ({
-                ...prev,
-                userses: res.data.data[0],
-              }));
-            })
-            .catch((err) => {
-              setverify({
-                isSuccess: false,
-                userses: [],
-                isLoading: false,
-                isError: true,
-              });
-            });
-  },[])
+  }, [token, setverify]);
 
   return verify;
 };
@@ -130,6 +139,7 @@ const router = createBrowserRouter([
   {
     element: <LeaderboardScore />,
     path: "/leaderboard",
+  
   },
   {
     element: <Dashboard />,

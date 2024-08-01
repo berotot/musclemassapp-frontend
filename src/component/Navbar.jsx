@@ -52,15 +52,10 @@ const navigate = useNavigate()
           </div>
           {menuOpen && (
             <ul className="absolute top-full right-0 bg-white shadow-md rounded-md mt-2 p-4 space-y-2">
-              <li className="cursor-pointer" onClick={() => setMenuOpen(false)}>
-                Home
-              </li>
-              <li className="cursor-pointer" onClick={() => setMenuOpen(false)}>
-                Scores
-              </li>
-              <li className="cursor-pointer" onClick={() => setMenuOpen(false)}>
-                Login
-              </li>
+           
+          <li onClick={()=>navigate('/')} className="cursor-pointer">Home</li>
+          <li onClick={()=>navigate('/leaderboard')} className="cursor-pointer">Scores</li>
+          <li onClick={()=>navigate('/aktivitas')} className="cursor-pointer">Aktivitas</li>
             </ul>
           )}
         </div>

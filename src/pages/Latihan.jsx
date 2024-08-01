@@ -7,7 +7,7 @@ import { scores } from "../etc/DataLatihanAlternativ";
 import { useSurvei } from "../store/AppContext";
 import { IoMdExit } from "react-icons/io";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { SelesaiLatihan } from "../component/SelesaiLatihan";
 export const Latihan = () => {
@@ -49,10 +49,11 @@ export const Latihan = () => {
       .then((res) => {})
       .catch((res) => {});
   };
-
+const navigate = useNavigate()
   useEffect(()=>{
-if (!dataWorkout) {
+if (dataWorkout.length === 0) {
   alert("pilih type latihan dahulu")
+  navigate('/dashboard')
 }
   },[])
   return (

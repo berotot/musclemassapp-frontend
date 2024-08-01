@@ -31,6 +31,7 @@ export const AktivitasLatihan = () => {
 
       <main className="">
         
+      <a className=" font-['poppins'] underline  font-semibold" href="https://forms.gle/kG31tQcpTcF7CLGW8">bantu developer isi questioner yuk 🙇‍♂️</a>
 
         <div className=" my-4 h-[165px] w-full rounded-md bg-black"></div>
 
