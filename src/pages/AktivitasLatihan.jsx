@@ -5,10 +5,13 @@ import axios from "axios";
 import { ListLeaderScore } from "../component/ListLeaderScore";
 import Cookies from "js-cookie";
 import { ListActivity } from "../component/ListActivity";
+import { VerifyUser } from "../routes/route";
+import { FormModalAuthSign } from "../component/FormModalAuth";
 
 export const AktivitasLatihan = () => {
   const { armMuscle } = DataImage();
   const [data, setdata] = useState([]);
+  const { isSuccess, userses, isLoading, isError } = VerifyUser();
   const getDataLatihan = async () => {
     await axios
       .get(
@@ -28,7 +31,7 @@ export const AktivitasLatihan = () => {
   return (
     <div className="p-4 h-screen">
       <Navbar />
-
+{isError && <FormModalAuthSign />}
       <main className="">
         
       <a className=" font-['poppins'] underline  font-semibold" href="https://forms.gle/kG31tQcpTcF7CLGW8">bantu developer isi questioner yuk 🙇‍♂️</a>

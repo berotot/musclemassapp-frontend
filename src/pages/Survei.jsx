@@ -3,6 +3,8 @@ import { useSurvei } from "../store/AppContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { DataImage } from "../etc/img/DataImage";
 import { Navbar } from "../component/Navbar";
+import { VerifyUser } from "../routes/route";
+import { FormModalAuthSign } from "../component/FormModalAuth";
 
 export const Survei = () => {
   const { setWeight, weight } = useSurvei();
@@ -11,6 +13,8 @@ export const Survei = () => {
   const { ectomorph, mesomorph, endomorph } = DataImage();
   const [indexSurvei, SetIndexSurvei] = useState(1);
   const [Bmi, setBmi] = useState({ b: 0, t: 0 });
+  const { isSuccess, userses, isLoading, isError } = VerifyUser();
+
 
   const prevSurvei = () =>
     indexSurvei === 0 ? SetIndexSurvei(1) : SetIndexSurvei(indexSurvei - 1);
@@ -52,7 +56,7 @@ export const Survei = () => {
   return (
     <div className="p-4 h-screen">
       <Navbar />
-
+{isError && <FormModalAuthSign />}
       <main>
         <div className="flex my-2 text-[#45474B] justify-between font-[poppins] text-[15px] font-semibold ">
           <button

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import Cookie from "js-cookie";
 import { VerifyUser } from "../routes/route";
+import { useLocation, useNavigate } from "react-router-dom";
 export const FormModalAuthLogin = () => {
   return (
     <>
@@ -89,8 +90,9 @@ export const FormModalAuthSignup = () => {
 };
 
 export const FormModalAuthSign = () => {
+  const locationNow = useLocation()
   const [datas, setData] = useState({ username: null });
-
+const navigate = useNavigate()
   const postFormSignupv2 = (e) => {
     e.preventDefault();
     axios
@@ -102,8 +104,9 @@ export const FormModalAuthSign = () => {
         });
         // const cekCook = Cookie.get('accessUser')
         // if(cekCook){
-          VerifyUser()
+          // VerifyUser()
         // }
+       navigate(locationNow)
        
       }).catch((err) => {
         alert(err.response.data.message);
