@@ -100,10 +100,10 @@ export const FormModalAuthSign = () => {
         Cookie.set("accessUser", JSON.stringify(res.data.data[0]), {
           expires: 6000000,
         });
-        const cekCook = Cookie.get('accessUser')
-        if(cekCook){
+        // const cekCook = Cookie.get('accessUser')
+        // if(cekCook){
           VerifyUser()
-        }
+        // }
        
       }).catch((err) => {
         alert(err.response.data.message);
