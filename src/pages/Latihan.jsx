@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../component/Navbar";
 import { DataImage } from "../etc/img/DataImage";
 import { IoMdInformationCircleOutline } from "react-icons/io";
@@ -49,6 +49,12 @@ export const Latihan = () => {
       .then((res) => {})
       .catch((res) => {});
   };
+
+  useEffect(()=>{
+if (!dataWorkout) {
+  alert("pilih type latihan dahulu")
+}
+  },[])
   return (
     <div className="p-4 h-screen">
       <Navbar />

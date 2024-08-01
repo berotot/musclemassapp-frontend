@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const [scroll, setScroll] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
+const navigate = useNavigate()
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -34,9 +35,9 @@ export const Navbar = () => {
           />
         </div>
         <ul className="sm:flex hidden gap-4">
-          <li className="cursor-pointer">Home</li>
-          <li className="cursor-pointer">Scores</li>
-          <li className="cursor-pointer">Login</li>
+          <li onClick={()=>navigate('/')} className="cursor-pointer">Home</li>
+          <li onClick={()=>navigate('/leaderboard')} className="cursor-pointer">Scores</li>
+          <li onClick={()=>navigate('/aktivitas')} className="cursor-pointer">aktivitas</li>
         </ul>
         <div className="sm:hidden relative">
           <div

@@ -3,9 +3,12 @@ import { Navbar } from "../component/Navbar";
 import { DataImage } from "../etc/img/DataImage";
 import axios from "axios";
 import { ListLeaderScore } from "../component/ListLeaderScore";
+import { useSurvei } from "../store/AppContext";
 
 export const LeaderboardScore = () => {
   const { armMuscle } = DataImage();
+  const {userses} = useSurvei();
+  const [myscores,setmyscore] = useState({})
   const [data, setdata] = useState([]);
   const getDataLatihan = async () => {
     await axios
@@ -31,14 +34,14 @@ export const LeaderboardScore = () => {
 
             <div>
               <p className=" font-[poppins] font-semibold text-[20px]">
-                Soerahmat
+                {userses.username}
               </p>
               <p className="font-[poppins] font-medium text-[15px]">
-                <span>🙈 </span>23999{" "}
+                <span>🙈 </span>{myscores.point}
               </p>
             </div>
           </div>
-          <p className=" font-[poppins] text-[20px] font-bold">#12</p>
+          <p className=" font-[poppins] text-[20px] font-bold">#{myscores.posisi}</p>
         </div>
 
         <div className=" my-4 h-[165px] w-full rounded-md bg-black"></div>
@@ -49,7 +52,7 @@ export const LeaderboardScore = () => {
 
         <ul className="my-4">
 
-        <ListLeaderScore dataScore={data} />
+        <ListLeaderScore dataScore={data} setmyscore={setmyscore} />
         </ul>
       </main>
     </div>

@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSurvei } from "../store/AppContext";
 
-export const ListLeaderScore = ({ dataScore }) => {
+export const ListLeaderScore = ({ dataScore, setmyscore }) => {
+  const { userses } = useSurvei();
+
+  useEffect(() => {
+    dataScore.forEach((res, index) => {
+      if (userses._id === res._uid) {
+        setmyscore({ username: res.username, point: res.total_points, posisi: index + 1 });
+      }
+    });
+  }, [dataScore]);
+
   return (
-    <>
+    <ul>
       {dataScore.map((res, index) => (
         <li
           key={index}
@@ -27,6 +38,6 @@ export const ListLeaderScore = ({ dataScore }) => {
           <p className="font-[poppins] text-[20px] font-bold">#{index + 1}</p>
         </li>
       ))}
-    </>
+    </ul>
   );
 };
