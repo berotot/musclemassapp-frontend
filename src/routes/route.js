@@ -20,6 +20,7 @@ import { PageNot } from "../pages/PageNot";
 
 export const VerifyUser = () => {
   const { verify, setverify } = useSurvei();
+  const {token,settoken} = useState(null)
   
   useEffect(() => {
     setverify({
@@ -40,6 +41,7 @@ export const VerifyUser = () => {
           Cookie.set("accessToken", resi.data.data.token, {
             expires: 6000000,
           });
+          settoken(resi.data.data.token)
           setverify((prev) => ({
             ...prev,
             isSuccess: true,
@@ -48,9 +50,22 @@ export const VerifyUser = () => {
           }));
 
           // Fetch profile setelah login berhasil
-          axios
+          
+        })
+        .catch((err) => {
+          setverify({
+            isSuccess: false,
+            userses: [],
+            isLoading: false,
+            isError: true,
+          });
+        });
+    }
+  }, []);
+  useEffect(()=>{
+    axios
             .get(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
-              headers: { Authorization: `Bearer ${resi.data.data.token}` },
+              headers: { Authorization: `Bearer ${token}` },
             })
             .then((res) => {
               setverify((prev) => ({
@@ -66,17 +81,7 @@ export const VerifyUser = () => {
                 isError: true,
               });
             });
-        })
-        .catch((err) => {
-          setverify({
-            isSuccess: false,
-            userses: [],
-            isLoading: false,
-            isError: true,
-          });
-        });
-    }
-  }, []);
+  },[])
 
   return verify;
 };
