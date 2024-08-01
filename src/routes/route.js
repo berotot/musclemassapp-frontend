@@ -76,10 +76,13 @@ export const VerifyUser = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          setverify((prev) => ({
-            ...prev,
+       
+          setverify({
+            isSuccess: true,
             userses: res.data.data[0],
-          }));
+            isLoading: false,
+            isError: false,
+          });
         })
         .catch((err) => {
           setverify({
