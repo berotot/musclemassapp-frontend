@@ -93,21 +93,17 @@ export const FormModalAuthSign = () => {
   const locationNow = useLocation()
   const [datas, setData] = useState({ username: null });
 const navigate = useNavigate()
-  const postFormSignupv2 = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/api/v2/auth/signupv2`, datas)
-      .then((res) => {
-        alert(res.data.message);
-        Cookie.set("accessUser", JSON.stringify(res.data.data[0]), {
-          expires: 6000000,
-        });
-        // const cekCook = Cookie.get('accessUser')
-        // if(cekCook){
-          // VerifyUser()
-        // }
-        alert(locationNow)
-       navigate(locationNow.pathname)
+
+const postFormSignupv2 = (e) => {
+  e.preventDefault();
+  axios
+  .post(`${process.env.REACT_APP_API_URL}/api/v2/auth/signupv2`, datas)
+  .then((res) => {
+    alert(res.data.message);
+    Cookie.set("accessUser", JSON.stringify(res.data.data[0]), {
+      expires: 6000000,
+    });
+        window.location.reload()
       }).catch((err) => {
         alert(err.response.data.message);
       });
