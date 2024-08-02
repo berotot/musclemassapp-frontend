@@ -66,33 +66,6 @@ export const VerifyUser = () => {
   return verify;
 };
 
-// const PrivateRoute = ({ element, RoleAllowed, fallbackPath }) => {
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const { isSuccess, userses, isLoading, isError } = VerifyUser();
-
-//   useEffect(() => {
-//     if (!isLoading) {
-//       if (isError) {
-//         navigate('/login', { state: { from: location } });
-//       } else if (userses?.role !== RoleAllowed) {
-//         navigate(fallbackPath, { state: { from: location } });
-//       }
-//     }
-//   }, [isLoading, isError, userses, RoleAllowed, navigate, location, fallbackPath]);
-
-//   if (isLoading) {
-//     alert("aa")
-//     // return <div>Loading...</div>;  // Tampilkan loading spinner atau elemen lain saat sedang memuat
-//   }
-
-//   if (isSuccess && userses?.role === RoleAllowed) {
-//     return element;
-//   }
-
-//   return null;
-// };
-
 const router = createBrowserRouter([
   {
     element: <Home />,
