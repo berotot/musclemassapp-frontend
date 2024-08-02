@@ -10,7 +10,7 @@ export const SelesaiLatihan = ({ initialSeconds, closeOn }) => {
   useEffect(() => {
     if (seconds === 0) {
       setTimeout(() => {
-        // closeOn(false);
+       
         navigate('/aktivitas')
       }, 1000);
     }
