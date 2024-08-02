@@ -6,7 +6,10 @@ import { ListLeaderScore } from "../component/ListLeaderScore";
 import Cookies from "js-cookie";
 import { ListActivity } from "../component/ListActivity";
 import { VerifyUser } from "../routes/route";
-import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
+import {
+  FormModalAuthLogin,
+  FormModalAuthSign,
+} from "../component/FormModalAuth";
 
 export const AktivitasLatihan = () => {
   const { armMuscle } = DataImage();
@@ -31,10 +34,14 @@ export const AktivitasLatihan = () => {
   return (
     <div className="p-4 h-screen">
       <Navbar />
-{isError && <FormModalAuthLogin />}
+      {isError && <FormModalAuthLogin />}
       <main className="">
-        
-      <a className=" font-['poppins'] underline  font-semibold" href="https://forms.gle/kG31tQcpTcF7CLGW8">bantu developer isi questioner yuk 🙇‍♂️</a>
+        <a
+          className=" font-['poppins'] underline  font-semibold"
+          href="https://forms.gle/kG31tQcpTcF7CLGW8"
+        >
+          bantu developer isi questioner yuk 🙇‍♂️
+        </a>
 
         <div className=" my-4 h-[165px] w-full rounded-md bg-black"></div>
 
@@ -43,17 +50,11 @@ export const AktivitasLatihan = () => {
         </div>
 
         <ul className="my-4">
-         
-
-          {data.length > 0 ? 
-          
-          <ListActivity dataScore={data} />
-          :    
-          <li
-      
-      className="shadow-md rounded-md p-2 px-4 ring-1 ring-[#45474B] my-4 w-full h-max items-center flex text-[#45474B] justify-between"
-    >
-    </li>}
+          {data.length > 0 ? (
+            <ListActivity dataScore={data} />
+          ) : (
+            <li className="shadow-md animate-pulse bg-slate-300 rounded-md p-2 px-4 py-10  my-4 w-full items-center"></li>
+          )}
         </ul>
       </main>
     </div>

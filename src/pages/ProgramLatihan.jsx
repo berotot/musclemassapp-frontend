@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSurvei } from "../store/AppContext";
-import { scores } from "../etc/DataLatihanAlternativ";
 import { Navbar } from "../component/Navbar";
 import axios from "axios";
 import { ListProgramLatihan } from "../component/ListProgramLatihan";

@@ -5,6 +5,9 @@ export const Profile = () => {
   return (
     <div className='p-4 h-screen'>
       <Navbar />
+      <main>
+        
+      </main>
 
     </div>
   )

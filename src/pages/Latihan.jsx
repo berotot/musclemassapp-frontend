@@ -3,7 +3,6 @@ import { Navbar } from "../component/Navbar";
 import { DataImage } from "../etc/img/DataImage";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { RestLatihan } from "../component/RestLatihan";
-import { scores } from "../etc/DataLatihanAlternativ";
 import { useSurvei } from "../store/AppContext";
 import { IoMdExit } from "react-icons/io";
 import axios from "axios";
