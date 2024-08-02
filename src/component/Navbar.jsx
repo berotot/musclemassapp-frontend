@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'
 
 export const Navbar = () => {
   const [scroll, setScroll] = useState(false);
@@ -56,6 +57,12 @@ const navigate = useNavigate()
           <li onClick={()=>navigate('/')} className="cursor-pointer">Home</li>
           <li onClick={()=>navigate('/leaderboard')} className="cursor-pointer">Scores</li>
           <li onClick={()=>navigate('/aktivitas')} className="cursor-pointer">Aktivitas</li>
+          <li onClick={()=>{
+              Cookies.remove('accessToken',{expires:0})
+              alert('Berhasil melakukan logout')
+              // dispatch(reset());
+              navigate("/");
+          }} className="cursor-pointer">Logout</li>
             </ul>
           )}
         </div>

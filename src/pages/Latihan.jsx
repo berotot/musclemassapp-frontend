@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { SelesaiLatihan } from "../component/SelesaiLatihan";
+
 export const Latihan = () => {
   const { prev, next } = DataImage();
   const { weight, dataWorkout } = useSurvei();

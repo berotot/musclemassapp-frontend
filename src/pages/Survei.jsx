@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DataImage } from "../etc/img/DataImage";
 import { Navbar } from "../component/Navbar";
 import { VerifyUser } from "../routes/route";
-import { FormModalAuthSign } from "../component/FormModalAuth";
+import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
 
 export const Survei = () => {
   const { setWeight, weight } = useSurvei();
@@ -56,7 +56,7 @@ export const Survei = () => {
   return (
     <div className="p-4 h-screen">
       <Navbar />
-{isError && <FormModalAuthSign />}
+{isError && <FormModalAuthLogin />}
       <main>
         <div className="flex my-2 text-[#45474B] justify-between font-[poppins] text-[15px] font-semibold ">
           <button

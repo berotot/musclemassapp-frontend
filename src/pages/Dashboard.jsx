@@ -6,16 +6,20 @@ import { VerifyUser } from "../routes/route";
 import {
   FormModalAuthLogin,
   FormModalAuthSign,
+  FormModalAuthSignup,
 } from "../component/FormModalAuth";
+import { useSurvei } from "../store/AppContext";
 
 export const Dashboard = () => {
+  const { authsign} = useSurvei();
   const { punggungMuscle, bahuMuscle, chestMuscle } = DataImage();
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
   const navigate = useNavigate();
   // console.log(userses);
   return (
     <>
-      {isError && <FormModalAuthSign />}
+      {isError && <FormModalAuthLogin />}
+      {authsign && <FormModalAuthSignup />}
 
       <div className="p-4 h-screen">
         <Navbar />
@@ -24,17 +28,17 @@ export const Dashboard = () => {
         <main>
           <div className="  my-8 w-full h-max items-center flex text-[#45474B] justify-between">
             <div>
-              {userses.username ? (
+              {userses[0].username !== null ? (
                 <p className=" font-[poppins] first-letter:uppercase font-semibold text-[20px]">
-                  {userses.username}
+                  {userses[0].username}
                 </p>
               ) : (
                 <div className=" font-[poppins] font-semibold w-[100px] animate-pulse rounded-md bg-slate-300 h-[20px]"></div>
               )}
-              {userses.totalPoints || userses.totalPoints === 0 ? (
+              {userses[0].totalPoints || userses[0].totalPoints === 0 ? (
                 <p className="font-[poppins] font-medium text-[15px]">
                   <span>🙈 </span>
-                  {userses.totalPoints ? userses.totalPoints : 0}
+                  {userses[0].totalPoints ? userses[0].totalPoints : 0}
                 </p>
               ) : (
                 <div className="font-[poppins] font-medium rounded-md bg-slate-300 animate-pulse  mt-1 w-[70px] h-[15px]"></div>
@@ -53,7 +57,7 @@ export const Dashboard = () => {
             <p>{`PEMULA`}</p>
           </div>
 
-          {userses.username ? (
+          {userses[0].username ? (
             <ul className="my-4 flex  flex-col gap-3">
               <li
                 onClick={() => navigate("/survei/pemula/bahu")}

@@ -4,7 +4,7 @@ import { DataImage } from "../etc/img/DataImage";
 import axios from "axios";
 import { ListLeaderScore } from "../component/ListLeaderScore";
 import { VerifyUser } from "../routes/route";
-import { FormModalAuthSign } from "../component/FormModalAuth";
+import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
 
 export const LeaderboardScore = () => {
   const { armMuscle } = DataImage();
@@ -29,7 +29,7 @@ export const LeaderboardScore = () => {
   return (
     <div className="p-4 h-screen">
       <Navbar />
-      {isError && <FormModalAuthSign />}
+      {isError && <FormModalAuthLogin />}
 
       <main className="">
         <div className="rounded-md p-2 px-4 ring-1 ring-[#45474B] my-8 w-full h-max items-center flex text-[#45474B] justify-between">

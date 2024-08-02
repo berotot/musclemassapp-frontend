@@ -20,41 +20,35 @@ import { PageNot } from "../pages/PageNot";
 
 export const VerifyUser = () => {
   const { verify, setverify } = useSurvei();
-  const [token, settoken] = useState(null);
+  const token = Cookie.get("accessToken");
 
   useEffect(() => {
     setverify({
       isSuccess: false,
-      userses: [],
+      userses: [{ username: null, totalPoints: null }],
       isLoading: true,
       isError: false,
     });
 
-    const accessUser = Cookie.get("accessUser");
-    if (accessUser) {
-      const decode = JSON.parse(decodeURIComponent(accessUser));
+    if (token) {
       axios
-        .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/login`, {
-          email: decode.email,
-          password: decode.password,
+        .get(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
         })
-        .then((resi) => {
-          Cookie.set("accessToken", resi.data.data.token, {
-            expires: 6000000,
-          });
-
-          settoken(resi.data.data.token);
-          setverify((prev) => ({
-            ...prev,
+        .then((res) => {
+          alert("sudah berhasil")
+          setverify({
             isSuccess: true,
+            userses: res.data.data,
             isLoading: false,
             isError: false,
-          }));
+          });
         })
         .catch((err) => {
+          alert(err.response.data.message);
           setverify({
             isSuccess: false,
-            userses: [],
+            userses: [{ username: null, totalPoints: null }],
             isLoading: false,
             isError: true,
           });
@@ -62,42 +56,15 @@ export const VerifyUser = () => {
     } else {
       setverify({
         isSuccess: false,
-        userses: [],
+        userses: [{ username: null, totalPoints: null }],
         isLoading: false,
         isError: true,
       });
     }
-  }, [setverify]);
-
-  useEffect(() => {
-    if (token) {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-       
-          setverify({
-            isSuccess: true,
-            userses: res.data.data[0],
-            isLoading: false,
-            isError: false,
-          });
-        })
-        .catch((err) => {
-          setverify({
-            isSuccess: false,
-            userses: [],
-            isLoading: false,
-            isError: true,
-          });
-        });
-    }
-  }, [token, setverify]);
+  }, []);
 
   return verify;
 };
-
 
 // const PrivateRoute = ({ element, RoleAllowed, fallbackPath }) => {
 //   const location = useLocation();
@@ -142,7 +109,6 @@ const router = createBrowserRouter([
   {
     element: <LeaderboardScore />,
     path: "/leaderboard",
-  
   },
   {
     element: <Dashboard />,
@@ -152,7 +118,7 @@ const router = createBrowserRouter([
   //   element: <KelolaLatihan />,
   //   path: "/kelolalatihan",
   // },
-  
+
   {
     element: <AktivitasLatihan />,
     path: "/aktivitas",
