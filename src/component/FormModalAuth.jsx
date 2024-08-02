@@ -72,7 +72,7 @@ export const FormModalAuthLogin = () => {
             <p>
               Belum punya akun ?{" "}
               <span
-                // onClick={() => setauthsign(true)}
+                onClick={() => setauthsign(true)}
                 className="  font-semibold"
               >
                 signup
@@ -95,13 +95,8 @@ export const FormModalAuthSignup = () => {
   });
   
   const navigate = useNavigate();
-  // const { setauthsign} = useSurvei();
-  // setverify({
-  //   isSuccess: false,
-  //   userses: [{ username: null, totalPoints: null }],
-  //   isLoading: true,
-  //   isError: false,
-  // });
+  const { setauthsign,setverify} = useSurvei();
+
 
   const postFormSignup = (e) => {
     e.preventDefault();
@@ -109,9 +104,7 @@ export const FormModalAuthSignup = () => {
       .post(`${process.env.REACT_APP_API_URL}/api/v1/auth/signup`, datas)
       .then((res) => {
         alert(res.data.message);
-        Cookie.set("accessUser", JSON.stringify(res.data.data[0]), {
-          expires: 6000000,
-        });
+     
         window.location.reload();
       })
       .catch((err) => {
@@ -167,7 +160,11 @@ export const FormModalAuthSignup = () => {
           </button>
           <div className="font-['poppins'] text-[15px]">
             <p>
-              Belum punya akun ? <span className="  font-semibold">Login</span>
+              Belum punya akun ? <span
+              onClick={()=>{setauthsign(false)
+
+              }}
+              className="  font-semibold">Login</span>
             </p>
           </div>
         </form>
