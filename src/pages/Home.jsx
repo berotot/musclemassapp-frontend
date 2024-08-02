@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Navbar } from "../component/Navbar";
 import { FormModalAuthSignup } from "../component/FormModalAuth";
 
@@ -20,7 +20,8 @@ export const Home = () => {
             mulai
           </button>
         </div>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+  
+        <section className="w-full py-12 md:py-24 lg:py-32 mt-24 font-['poppins']">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
@@ -40,30 +41,29 @@ export const Home = () => {
                   </p>
                 </div>
                 <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Strength Training</h3>
+                  <h3 className="text-xl font-bold">Latihan kekuatan</h3>
                   <p className="text-muted-foreground">
-                    Boost your metabolism and build lean muscle with our targeted strength training exercises, designed
-                    to challenge you at every level.
+                  Tingkatkan kekuatan Anda dan bangun otot dengan latihan kekuatan yang ditargetkan, yang dirancang
+                  untuk menantang Anda di setiap level.
                   </p>
                 </div>
                 <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Personalized Nutrition</h3>
+                  <h3 className="text-xl font-bold">Mudah di gunakan</h3>
                   <p className="text-muted-foreground">
-                    Achieve your goals with our custom nutrition plans, tailored to your individual needs and
-                    preferences.
+                    Kami memberikan kemudahan untuk anda melakukan latihan dengan fitur fitur kami
                   </p>
                 </div>
               </div>
-              <img
-                src="/placeholder.svg"
-                width="550"
-                height="310"
-                alt="Image"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-              />
+           
             </div>
           </div>
         </section>
+        <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+        <p className="text-xs text-muted-foreground">&copy; 2024 Berotot. soxo developer</p>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+         
+        </nav>
+      </footer>
       </main>
    
     </div>
