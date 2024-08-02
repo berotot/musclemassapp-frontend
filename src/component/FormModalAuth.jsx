@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSurvei } from "../store/AppContext";
 
 export const FormModalAuthLogin = () => {
-  const locationNow = useLocation();
   const [datas, setData] = useState({ email: null, password: null });
   const navigate = useNavigate();
   const { authsign, setauthsign } = useSurvei();

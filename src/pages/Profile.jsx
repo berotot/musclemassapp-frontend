@@ -11,6 +11,7 @@ export const Profile = () => {
       <Navbar />
 
       {isError && <FormModalAuthLogin/>}
+      
       <main className="p-4 h-screen">
         <div className=" flex flex-col  items-center w-full  gap-3">
           <div className="h-[120px] mb-8  w-[120px] animate-pulse rounded-full   bg-slate-300 " />
