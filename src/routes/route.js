@@ -87,10 +87,6 @@ const router = createBrowserRouter([
     element: <Dashboard />,
     path: "/dashboard",
   },
-  // {
-  //   element: <KelolaLatihan />,
-  //   path: "/kelolalatihan",
-  // },
 
   {
     element: <AktivitasLatihan />,
