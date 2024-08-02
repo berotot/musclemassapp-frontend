@@ -1,7 +1,11 @@
 import React from 'react'
+import { Navbar } from '../component/Navbar'
 
 export const Profile = () => {
   return (
-    <div>Profile</div>
+    <div className='p-4 h-screen'>
+      <Navbar />
+
+    </div>
   )
 }
