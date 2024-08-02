@@ -21,6 +21,16 @@ const navigate = useNavigate()
     };
   }, []);
 
+  const handleToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleLogout = () => {
+    Cookies.remove('accessToken', { expires: 0 });
+    alert('Berhasil melakukan logout');
+    // dispatch(reset());
+    navigate('/');
+  };
   return (
     <nav className="mb-[75px]">
       <div
@@ -52,19 +62,17 @@ const navigate = useNavigate()
             />
           </div>
           {menuOpen && (
-            <ul className="absolute top-full right-0 bg-white shadow-md rounded-md mt-2 p-4 space-y-2">
-           
-          <li onClick={()=>navigate('/')} className="cursor-pointer">Home</li>
-          <li onClick={()=>navigate('/leaderboard')} className="cursor-pointer">Scores</li>
-          <li onClick={()=>navigate('/aktivitas')} className="cursor-pointer">Aktivitas</li>
-          <li onClick={()=>{
-              Cookies.remove('accessToken',{expires:0})
-              alert('Berhasil melakukan logout')
-              // dispatch(reset());
-              navigate("/");
-          }} className="cursor-pointer">Logout</li>
-            </ul>
-          )}
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={handleToggle} />
+      )}
+            <div className={`fixed top-0 left-0 h-full bg-white shadow-md z-50 transition-transform transform ${menuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+              <ul className="mt-16 space-y-2 p-4">
+                <li onClick={() => navigate('/')} className="cursor-pointer">Home</li>
+                <li onClick={() => navigate('/leaderboard')} className="cursor-pointer">Scores</li>
+                <li onClick={() => navigate('/aktivitas')} className="cursor-pointer">Aktivitas</li>
+                <li onClick={handleLogout} className="cursor-pointer">Logout</li>
+              </ul>
+            </div>
+ 
         </div>
       </div>
     </nav>

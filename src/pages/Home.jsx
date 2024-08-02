@@ -7,7 +7,9 @@ export const Home = () => {
   const navigate = useNavigate();
   return (
     <div className="p-4 h-screen">
+
       <Navbar />
+      
       <main className="">
         <div className="flex gap-4  flex-col items-center h-[440px] justify-center">
           <h2 className=" text-center font-bold text-[40px] text-[#45474B] font-[poppins] ">
