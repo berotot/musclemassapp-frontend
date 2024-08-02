@@ -7,7 +7,7 @@ export const ListActivity = ({ dataScore }) => {
     <>
       {dataScore.map((res, index) => (
          <li
-         // key={index}
+      
          className="shadow-md rounded-md p-2 px-4 ring-1 ring-[#45474B] my-4 w-full h-max items-center flex text-[#45474B] justify-between"
        >
          <div className="flex items-center gap-2">
