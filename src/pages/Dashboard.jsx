@@ -45,7 +45,7 @@ export const Dashboard = () => {
               )}
             </div>
 
-            <div className="ring-1 ring-black rounded-full w-[50px] h-[50px] overflow-hidden ">
+            <div onClick={()=>navigate('/profile')} className="ring-1 ring-black rounded-full w-[50px] h-[50px] overflow-hidden ">
               <img src="" alt="" />
             </div>
             
