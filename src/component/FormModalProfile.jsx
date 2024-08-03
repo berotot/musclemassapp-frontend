@@ -12,12 +12,11 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     password: null,
   });
 
-  const postFormSign = (e) => {
+  const postFormUsername = (e) => {
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
-        email: datas.email,
-        password: datas.password,
+        username: datas.username, 
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -27,6 +26,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
         alert(err.response.data.message);
       });
   };
+  
   return (
     <>
       {clickOn.username || clickOn.email || clickOn.password ? (
