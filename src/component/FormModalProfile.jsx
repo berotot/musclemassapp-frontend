@@ -84,7 +84,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
                 onChange={(e) =>
                   setData({ ...datas, username: e.target.value })
                 }
-                defaultValue={dataPar.username}
+                defaultValue={dataPar[0].username}
                 className=" ring-1 ring-black focus:shadow-md rounded-md h-8 px-2"
                 type="text"
               />
@@ -115,7 +115,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
               </label>
               <input
                 onChange={(e) => setData({ ...datas, email: e.target.value })}
-                defaultValue={dataPar.email}
+                defaultValue={dataPar[0].email}
                 className=" ring-1 ring-black focus:shadow-md rounded-md h-8 px-2"
                 type="text"
               />
@@ -145,10 +145,11 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
                 Password
               </label>
               <input
-                defaultValue={dataPar.username}
+                defaultValue={dataPar[0].username}
                 onChange={(e) =>
                   setData({ ...datas, password: e.target.value })
                 }
+                
                 className=" focus:shadow-md ring-1 ring-black rounded-md h-8 px-2"
                 type="text"
               />
