@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSurvei } from "../store/AppContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { DataImage } from "../etc/img/DataImage";
 import { Navbar } from "../component/Navbar";
 import { VerifyUser } from "../routes/route";
@@ -8,12 +8,15 @@ import {
   FormModalAuthLogin,
   FormModalAuthSign,
 } from "../component/FormModalAuth";
+import { useRef } from "react";
 
 export const Survei = () => {
   document.title = 'Survei'
   const { setWeight, weight } = useSurvei();
   const navigate = useNavigate();
   const { type, diff } = useParams();
+  const location = useLocation();
+  const reff = useRef()
   const [indexSurvei, SetIndexSurvei] = useState(1);
   const [Bmi, setBmi] = useState({ b: 0, t: 0 });
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
@@ -69,7 +72,7 @@ export const Survei = () => {
           </button>
           <button
             className={`${indexSurvei === 1 ? "" : "hidden"}`}
-            onClick={()=>navigate('/dashboard')}
+            onClick={()=>navigate(`/dashboard`)}
           >
             {`<- `}Kembali
           </button>
