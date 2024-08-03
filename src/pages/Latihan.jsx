@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { SelesaiLatihan } from "../component/SelesaiLatihan";
 
 export const Latihan = () => {
+  document.title = "Latihan"
   const { prev, next } = DataImage();
   const { weight, dataWorkout } = useSurvei();
   const { type } = useParams();
