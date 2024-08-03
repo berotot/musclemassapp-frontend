@@ -4,6 +4,7 @@ import { Navbar } from "../component/Navbar";
 import { FormModalAuthSignup } from "../component/FormModalAuth";
 
 export const Home = () => {
+  document.title = "Home"
   const navigate = useNavigate();
   return (
     <div className="p-4 h-screen">
