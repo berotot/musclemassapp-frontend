@@ -7,6 +7,7 @@ import { VerifyUser } from "../routes/route";
 import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
 
 export const LeaderboardScore = () => {
+  document.title = "Peringkat"
   const { armMuscle } = DataImage();
   const [myscores, setmyscore] = useState({ username: null, point: null, posisi: null });
   const [data, setdata] = useState([]);
