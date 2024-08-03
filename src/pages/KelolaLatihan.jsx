@@ -7,6 +7,7 @@ import { MdAdd } from "react-icons/md";
 import { ListLatihanKelola } from "../component/ListLatihanKelola";
 
 export const KelolaLatihan = () => {
+  document.title = "Kelola Latihan"
   const { armMuscle } = DataImage();
   const [clickForm, setClickForm] = useState(false);
   const [data, setdata] = useState([]);

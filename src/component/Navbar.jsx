@@ -112,14 +112,15 @@ export const Navbar = () => {
               >
                 Aktivitas
               </li>
-              <li onClick={handleLogout} className="cursor-pointer">
-                Logout
-              </li>
+             
               <li
-                onClick={() => navigate("/peringkat")}
+                onClick={() => navigate("/leaderboard")}
                 className="cursor-pointer"
               >
                 Peringkat
+              </li>
+              <li onClick={handleLogout} className="cursor-pointer">
+                Logout
               </li>
                 </>
               

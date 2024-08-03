@@ -5,10 +5,10 @@ import axios from "axios";
 import { ListLeaderScore } from "../component/ListLeaderScore";
 import { VerifyUser } from "../routes/route";
 import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
+import Cookies from 'js-cookie';
 
 export const LeaderboardScore = () => {
   document.title = "Peringkat"
-  const { armMuscle } = DataImage();
   const [myscores, setmyscore] = useState({ username: null, point: null, posisi: null });
   const [data, setdata] = useState([]);
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
@@ -17,7 +17,9 @@ export const LeaderboardScore = () => {
     const getDataLatihan = async () => {
 
       try {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/user/leaderboard`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/user/leaderboard`, {
+          headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
+        });
         setdata(res.data.data);
       } catch (error) {
         alert("Error fetching data");
