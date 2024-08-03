@@ -4,6 +4,7 @@ import { Navbar } from "../component/Navbar";
 import axios from "axios";
 import { ListProgramLatihan } from "../component/ListProgramLatihan";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export const ProgramLatihan = () => {
   const { type, diff } = useParams();
@@ -16,7 +17,10 @@ export const ProgramLatihan = () => {
     await axios
       .post(
         `${process.env.REACT_APP_API_URL}/api/v1/user/latihan/recomended/${diff}/${type}`,
-        weight
+        weight,
+        {
+          headers: { Authorization: `Bearer ${Cookies.get('accessToken')}` },
+        }
       )
       .then((res) => {
         setDataWorkout(res.data.data);

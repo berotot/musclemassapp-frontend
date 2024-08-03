@@ -4,7 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DataImage } from "../etc/img/DataImage";
 import { Navbar } from "../component/Navbar";
 import { VerifyUser } from "../routes/route";
-import { FormModalAuthLogin, FormModalAuthSign } from "../component/FormModalAuth";
+import {
+  FormModalAuthLogin,
+  FormModalAuthSign,
+} from "../component/FormModalAuth";
 
 export const Survei = () => {
   const { setWeight, weight } = useSurvei();
@@ -14,7 +17,6 @@ export const Survei = () => {
   const [indexSurvei, SetIndexSurvei] = useState(1);
   const [Bmi, setBmi] = useState({ b: 0, t: 0 });
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
-
 
   const prevSurvei = () =>
     indexSurvei === 0 ? SetIndexSurvei(1) : SetIndexSurvei(indexSurvei - 1);
@@ -56,7 +58,7 @@ export const Survei = () => {
   return (
     <div className="p-4 h-screen">
       <Navbar />
-{isError && <FormModalAuthLogin />}
+      {isError && <FormModalAuthLogin />}
       <main>
         <div className="flex my-2 text-[#45474B] justify-between font-[poppins] text-[15px] font-semibold ">
           <button
@@ -73,7 +75,7 @@ export const Survei = () => {
           </button>
         </div>
 
-        <div className="h-full w-full">
+        <div className="h-full w-full  font-['poppins']">
           {/*           
           <ul
             className={`${

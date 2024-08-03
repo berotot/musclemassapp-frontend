@@ -92,7 +92,13 @@ if (dataWorkout.length === 0) {
         <div className="w-full mt-10 flex justify-center">
           <button
             onClick={() => {
+              if (indexLatihan === dataWorkout.length - 1) {
+                setselesaiLatihan(true)
+                postDataLatihan();
+              }else{
               setRestLatihan(!restLatihan);
+              NextLatihan();
+              }
             }}
             className=" cursor-pointer  w-max px-4 pt-2 pb-2 bg-[#379777] border-2 rounded-md text-[#F5F7F8] border-solid border-[#45474B] font-medium  font-[poppins]"
           >

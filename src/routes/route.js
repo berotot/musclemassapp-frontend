@@ -36,7 +36,6 @@ export const VerifyUser = () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          alert("sudah berhasil")
           setverify({
             isSuccess: true,
             userses: res.data.data,
