@@ -62,8 +62,14 @@ export const Survei = () => {
       <main>
         <div className="flex my-2 text-[#45474B] justify-between font-[poppins] text-[15px] font-semibold ">
           <button
-            className={`${indexSurvei === 1 ? "invisible" : ""}`}
+            className={`${indexSurvei === 1 ? "hidden" : ""}`}
             onClick={prevSurvei}
+          >
+            {`<- `}Sebelumnya
+          </button>
+          <button
+            className={`${indexSurvei === 1 ? "" : "hidden"}`}
+            onClick={()=>navigate('/dashboard')}
           >
             {`<- `}Kembali
           </button>
