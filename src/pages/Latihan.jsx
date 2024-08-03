@@ -72,9 +72,8 @@ if (dataWorkout.length === 0) {
                 res.contentUrl !== "null" ? `url(${res.contentUrl})` : "none",
             }}
           >
-            <div className="absolute inset-0 bg-black  opacity-35 rounded-md"></div>
-            {/* <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-black to-transparent opacity-50"></div>   */}
-            <div className="relative z-10 flex justify-between">
+            <div className="absolute inset-0 bg-black  opacity-35 rounded-md" />
+         <div className="relative z-10 flex justify-between">
               <h1 className="text-white  font-medium text-[20px] first-letter:uppercase">
                 {res.name}
               </h1>
