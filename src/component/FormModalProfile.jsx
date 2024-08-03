@@ -54,6 +54,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
         alert(err.response.data.message);
       });
   };
+ 
   
   return (
     <>
