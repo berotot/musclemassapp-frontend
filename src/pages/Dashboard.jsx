@@ -11,6 +11,7 @@ import {
 import { useSurvei } from "../store/AppContext";
 
 export const Dashboard = () => {
+  document.title = "Dashboard"
   const { authsign} = useSurvei();
   const { punggungMuscle, bahuMuscle, chestMuscle } = DataImage();
   const { isSuccess, userses, isLoading, isError } = VerifyUser();

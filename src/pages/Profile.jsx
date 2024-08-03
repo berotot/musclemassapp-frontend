@@ -6,6 +6,7 @@ import { FormModalAuthLogin } from "../component/FormModalAuth";
 import { FormModalProfile } from "../component/FormModalProfile";
 
 export const Profile = () => {
+  document.title = "Profile"
   const {userses, isError} = VerifyUser()
   const [modal,setModal] = useState({username:false,email:false,password:false})
 

@@ -12,6 +12,7 @@ import {
 } from "../component/FormModalAuth";
 
 export const AktivitasLatihan = () => {
+  document.title = "Aktivitas"
   const { armMuscle } = DataImage();
   const [data, setdata] = useState(null);
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
