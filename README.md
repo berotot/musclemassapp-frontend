@@ -8,8 +8,8 @@ Dalam website ini memberikan fitur sebagai berikut:
 - rekomendasi latihan
 - pilihan tipe otot yang di sediakan
 
-## Backend
+## Backend https://api-musclemassappv2.vercel.app/
 Pada backend menggunakan framework expressjs, untuk database mennggunakan mongodb.
 
-## Frontend
+## Frontend https://musclemassapp.vercel.app/
 Pada frontend menggunakan librarry reactjs.
