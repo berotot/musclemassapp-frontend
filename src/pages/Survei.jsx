@@ -10,6 +10,7 @@ import {
 } from "../component/FormModalAuth";
 
 export const Survei = () => {
+  document.title = 'Survei'
   const { setWeight, weight } = useSurvei();
   const navigate = useNavigate();
   const { type, diff } = useParams();
