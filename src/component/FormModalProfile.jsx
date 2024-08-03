@@ -16,7 +16,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
-        username: datas.username, 
+        username: datas.username,
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -30,7 +30,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
-        username: datas.username, 
+        username: datas.username,
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -44,7 +44,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
-        username: datas.username, 
+        password: datas.password,
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -54,8 +54,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
         alert(err.response.data.message);
       });
   };
- 
-  
+
   return (
     <>
       {clickOn.username || clickOn.email || clickOn.password ? (
@@ -151,7 +150,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
                   setData({ ...datas, password: e.target.value })
                 }
                 className=" focus:shadow-md ring-1 ring-black rounded-md h-8 px-2"
-                type="password"
+                type="text"
               />
             </div>
             <button
