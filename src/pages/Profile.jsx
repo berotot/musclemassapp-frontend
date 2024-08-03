@@ -55,7 +55,7 @@ export const Profile = () => {
               Password
             </p>
             <div onClick={()=>handleOpenModal('password')} className="flex items-center gap-2">
-              {userses[0].password ?
+              {userses[0].email ?
               <p className=" text-[15px] font-['poppins']">*******</p>
               :<div className="h-[15px] w-[100px] bg-slate-300 animate-pulse rounded-md"></div>
               }<MdEdit />

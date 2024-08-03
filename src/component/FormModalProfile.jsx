@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cookie from "js-cookie";
 import { VerifyUser } from "../routes/route";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,21 +7,21 @@ import { useSurvei } from "../store/AppContext";
 import Cookies from "js-cookie";
 export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
   const [datas, setData] = useState({
-    username: null,
-    email: null,
-    password: null,
+    username: dataPar.username,
+    email: dataPar.email,
+    password: dataPar.password,
   });
 
   const postFormUsername = (e) => {
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
+      .put(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
         username: datas.username,
       },{
         headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
       })
       .then((res) => {
-        alert("Berhasil edit profile");
+        // alert("Berhasil edit profile");
         window.location.reload();
       })
       .catch((err) => {
@@ -31,7 +31,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
   const postFormEmail = (e) => {
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
+      .put(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
         username: datas.username,
       },{
         headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
@@ -47,7 +47,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
   const postFormPassword = (e) => {
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
+      .put(`${process.env.REACT_APP_API_URL}/api/v1/user/profile`, {
         password: datas.password,
       },{
         headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
@@ -60,6 +60,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
         alert(err.response.data.message);
       });
   };
+ 
 
   return (
     <>
