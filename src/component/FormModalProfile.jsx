@@ -26,6 +26,34 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
         alert(err.response.data.message);
       });
   };
+  const postFormEmail = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
+        username: datas.username, 
+      })
+      .then((res) => {
+        alert("Berhasil edit profile");
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  const postFormPassword = (e) => {
+    e.preventDefault();
+    axios
+      .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
+        username: datas.username, 
+      })
+      .then((res) => {
+        alert("Berhasil edit profile");
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
   
   return (
     <>
@@ -42,7 +70,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
       {clickOn.username && (
         <div className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
           <form
-            onSubmit={postFormSign}
+            onSubmit={postFormUsername}
             className="rounded-md bg-[#F5F7F8]   ring-1 ring-black py-6 px-4  mx-2 flex gap-4  flex-col"
           >
             <div className="font-['poppins'] mb-4  text-[23px] font-bold">
@@ -74,7 +102,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
       {clickOn.email && (
         <div className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
           <form
-            onSubmit={postFormSign}
+            onSubmit={postFormEmail}
             className="rounded-md bg-[#F5F7F8]   ring-1 ring-black py-6 px-4  mx-2 flex gap-4  flex-col"
           >
             <div className="font-['poppins'] mb-4  text-[23px] font-bold">
@@ -105,7 +133,7 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
       {clickOn.password && (
         <div className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
           <form
-            onSubmit={postFormSign}
+            onSubmit={postFormPassword}
             className="rounded-md bg-[#F5F7F8]   ring-1 ring-black py-6 px-4  mx-2 flex gap-4  flex-col"
           >
             <div className="font-['poppins'] mb-4  text-[23px] font-bold">
