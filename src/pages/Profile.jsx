@@ -21,7 +21,7 @@ export const Profile = () => {
             </p>
             <div className="flex items-center gap-2">
               {userses[0].username ? 
-              <p className=" text-[15px] font-['poppins']">Anjayaani</p>
+              <p className=" text-[15px] font-['poppins']">{userses[0].username}</p>
               :  <div className="h-[15px] w-[96px] bg-slate-300 animate-pulse rounded-md"></div>
             }
             <MdEdit />
@@ -31,7 +31,7 @@ export const Profile = () => {
             <p className="text-[15px] font-semibold font-['poppins']">Email</p>
             <div className="flex items-center gap-2">
               {userses[0].email ?
-              <p className=" text-[15px] font-['poppins']">Anjayaani</p>
+              <p className=" text-[15px] font-['poppins']">{userses[0].email}</p>
               :<div className="h-[15px] w-[70px] bg-slate-300 animate-pulse rounded-md"></div>
               }
               <MdEdit />
@@ -42,7 +42,7 @@ export const Profile = () => {
               Password
             </p>
             <div className="flex items-center gap-2">
-              {userses[0].password?
+              {userses[0].password ?
               <p className=" text-[15px] font-['poppins']">*******</p>
               :<div className="h-[15px] w-[100px] bg-slate-300 animate-pulse rounded-md"></div>
               }<MdEdit />
