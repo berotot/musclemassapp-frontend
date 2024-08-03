@@ -7,6 +7,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Cookies from 'js-cookie';
 
 export const ProgramLatihan = () => {
+  document.title = 'Program Latihan'
   const { type, diff } = useParams();
   const { weight } = useSurvei();
 

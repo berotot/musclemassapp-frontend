@@ -14,7 +14,6 @@ export const Survei = () => {
   const { setWeight, weight } = useSurvei();
   const navigate = useNavigate();
   const { type, diff } = useParams();
-  const { ectomorph, mesomorph, endomorph } = DataImage();
   const [indexSurvei, SetIndexSurvei] = useState(1);
   const [Bmi, setBmi] = useState({ b: 0, t: 0 });
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
