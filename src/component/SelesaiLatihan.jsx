@@ -40,11 +40,8 @@ export const SelesaiLatihan = ({ initialSeconds, closeOn }) => {
       <div className="fixed bottom-2 right-0 left-0 w-screen h-[220px] overflow-y-scroll z-[100]">
         <div className=" rounded-xl  bg-[#F5F7F8] h-full overflow-y-auto ring-1 ring-black py-6 px-4 mx-2 flex gap-4 items-center justify-center flex-col">
           <div className="w-full  text-center  font-['poppins'] ">
-            {/* <IoMdInformationCircleOutline className=" text-[25px] absolute right-6 -mt-2" /> */}
             <h1 className=" font-semibold">Keren kamu telah menyelesaikan latihan🎉</h1>
-            {/* <h1 className="text-[40px] font-bold my-2">
-              {formatTime(seconds)}
-            </h1> */}
+           
           </div>
 
           <div className="font-['poppins'] text-[15px]">

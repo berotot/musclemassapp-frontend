@@ -13,7 +13,7 @@ import {
 
 export const AktivitasLatihan = () => {
   const { armMuscle } = DataImage();
-  const [data, setdata] = useState([]);
+  const [data, setdata] = useState(null);
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
   const getDataLatihan = async () => {
     await axios
@@ -50,9 +50,12 @@ export const AktivitasLatihan = () => {
         </div>
 
         <ul className="my-4">
-          {data.length > 0 ? (
+          {data ? data.length > 0 ? (
             <ListActivity dataScore={data} />
-          ) : (
+          ) :
+          <li className="p-2 px-4 py-10  my-4 w-full  font-['poppins'] font-semibold"><p className="text-center">Belum ada aktivitas</p></li>
+          
+          : (
             <li className="shadow-md animate-pulse bg-slate-300 rounded-md p-2 px-4 py-10  my-4 w-full items-center"></li>
           )}
         </ul>
