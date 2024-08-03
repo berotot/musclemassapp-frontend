@@ -16,7 +16,6 @@ export const Dashboard = () => {
   const { punggungMuscle, bahuMuscle, chestMuscle } = DataImage();
   const { isSuccess, userses, isLoading, isError } = VerifyUser();
   const navigate = useNavigate();
-  // console.log(userses);
   return (
     <>
       {isError && <FormModalAuthLogin />}

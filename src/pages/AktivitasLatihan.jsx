@@ -8,7 +8,6 @@ import { ListActivity } from "../component/ListActivity";
 import { VerifyUser } from "../routes/route";
 import {
   FormModalAuthLogin,
-  FormModalAuthSign,
 } from "../component/FormModalAuth";
 
 export const AktivitasLatihan = () => {

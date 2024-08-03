@@ -4,7 +4,7 @@ import Cookie from "js-cookie";
 import { VerifyUser } from "../routes/route";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSurvei } from "../store/AppContext";
-
+import Cookies from "js-cookie";
 export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
   const [datas, setData] = useState({
     username: null,
@@ -17,6 +17,8 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
         username: datas.username,
+      },{
+        headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -31,6 +33,8 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
         username: datas.username,
+      },{
+        headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -45,6 +49,8 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/api/v1/auth/profile`, {
         password: datas.password,
+      },{
+        headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
       })
       .then((res) => {
         alert("Berhasil edit profile");
@@ -145,7 +151,6 @@ export const FormModalProfile = ({ clickOn, dataPar, closeOn }) => {
                 Password
               </label>
               <input
-                defaultValue={dataPar[0].username}
                 onChange={(e) =>
                   setData({ ...datas, password: e.target.value })
                 }
