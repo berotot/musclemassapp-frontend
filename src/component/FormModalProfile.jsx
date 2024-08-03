@@ -29,9 +29,10 @@ export const FormModalProfile = ({ clickOn, dataPar,closeOn }) => {
   };
   return (
     <>
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[99]" />
-      <div onClick={()=>closeOn({username:false,email:false,password:false})} className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
+       {clickOn.username || clickOn.email || clickOn.password ?<div onClick={()=>closeOn({username:false,email:false,password:false})} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-[99]" />:""}
         {clickOn.username && (
+          
+          <div className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
           <form
             onSubmit={postFormSign}
             className="rounded-md bg-[#F5F7F8]   ring-1 ring-black py-6 px-4  mx-2 flex gap-4  flex-col"
@@ -60,8 +61,11 @@ export const FormModalProfile = ({ clickOn, dataPar,closeOn }) => {
               Submit
             </button>
           </form>
+ </div>          
         )}
         {clickOn.email && (
+          <div className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
+          
           <form
             onSubmit={postFormSign}
             className="rounded-md bg-[#F5F7F8]   ring-1 ring-black py-6 px-4  mx-2 flex gap-4  flex-col"
@@ -89,8 +93,11 @@ export const FormModalProfile = ({ clickOn, dataPar,closeOn }) => {
               Submit
             </button>
           </form>
+          </div>
         )}
         {clickOn.password && (
+          <div  className=" z-[999]  fixed bottom-2 right-0 left-0   w-screen h-max ">
+
           <form
             onSubmit={postFormSign}
             className="rounded-md bg-[#F5F7F8]   ring-1 ring-black py-6 px-4  mx-2 flex gap-4  flex-col"
@@ -119,8 +126,9 @@ export const FormModalProfile = ({ clickOn, dataPar,closeOn }) => {
               Submit
             </button>
           </form>
+          </div>
         )}
-      </div>
+  
     </>
   );
 };
