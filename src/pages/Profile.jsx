@@ -3,12 +3,15 @@ import { Navbar } from "../component/Navbar";
 import { MdEdit } from "react-icons/md";
 import { VerifyUser } from "../routes/route";
 import { FormModalAuthLogin } from "../component/FormModalAuth";
+import { FormModalProfile } from "../component/FormModalProfile";
 
 export const Profile = () => {
   const {userses, isError} = VerifyUser()
   return (
     <div className="p-4 h-screen">
       <Navbar />
+
+      <FormModalProfile  dataPar={{username:"asas",email:"asas",password:"asas"}}/>
 
       {isError && <FormModalAuthLogin/>}
       
