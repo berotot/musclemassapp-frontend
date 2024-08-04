@@ -5,7 +5,7 @@ import axios from "axios";
 import { FormModalKLatihan } from "../component/FormModalKLatihan";
 import { MdAdd } from "react-icons/md";
 import { ListLatihanKelola } from "../component/ListLatihanKelola";
-
+import Cookies from 'js-cookie'
 export const KelolaLatihan = () => {
   document.title = "Kelola Latihan"
   const { armMuscle } = DataImage();
@@ -14,7 +14,11 @@ export const KelolaLatihan = () => {
 
   const getDataLatihan = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`)
+      .get(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan`,
+        {
+          headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
+        }
+      )
       .then((res) => {
         setdata(res.data.data);
       })
@@ -35,7 +39,9 @@ export const KelolaLatihan = () => {
   };
   const deleteDataLatihan = async (id) => {
     await axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan/${id}`)
+      .delete(`${process.env.REACT_APP_API_URL}/api/v1/admin/latihan/${id}`, {
+        headers: { Authorization: `Bearer ${Cookies.get("accessToken")}` },
+      })
       .then((res) => {
         getDataLatihan();
       })
